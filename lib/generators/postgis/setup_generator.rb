@@ -17,9 +17,9 @@ class Postgis::SetupGenerator < Rails::Generators::Base
 
   def create_migration_file
     if Rails::VERSION::STRING >= '4.0.0'
-      migration_template 'rails4/setup_postgis.rb', 'db/migrate/setup_postgis.rb'
+      migration_template('rails4/setup_postgis.rb', 'db/migrate/setup_postgis.rb')
     else
-      migration_template 'setup_postgis.rb', 'db/migrate/setup_postgis.rb'
+      migration_template('setup_postgis.rb', 'db/migrate/setup_postgis.rb')
     end
   end
 end
