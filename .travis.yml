@@ -6,6 +6,8 @@ rvm:
   - ruby-head
   - jruby-19mode
   - jruby-head
+addons:
+  postgresql: "9.3"
 env:
   - "RAILS_VERSION=4.1.0"
 matrix:
@@ -13,3 +15,5 @@ matrix:
     - env: "RAILS_VERSION=master"
     - rvm: ruby-head
     - rvm: jruby-head
+before_script:
+  - psql -c 'create database activerecord_postgresql_postgis_test;' -U postgres
