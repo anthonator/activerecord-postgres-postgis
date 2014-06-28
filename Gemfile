@@ -15,3 +15,11 @@ else
 end
 
 gem 'rails', rails
+
+platforms :ruby do
+  gem 'pg'
+end
+
+platforms :jruby do
+  gem 'activerecord-jdbcpostgresql-adapter'
+end
