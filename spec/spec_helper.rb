@@ -21,7 +21,9 @@ rails_version = ENV['RAILS_VERSION'] || '4.1.0'
 
 require File.expand_path("../../spec/dummy/rails-#{rails_version}/config/environment", __FILE__)
 
+require 'rails'
 require 'rspec/rails'
+require 'database_cleaner'
 
 RSpec.configure do |config|
   # The settings below are suggested to provide a good initial experience
@@ -82,6 +84,17 @@ RSpec.configure do |config|
       # Prevents you from mocking or stubbing a method that does not exist on
       # a real object. This is generally recommended.
       mocks.verify_partial_doubles = true
+    end
+
+    config.before(:suite) do
+      DatabaseCleaner.strategy = :transaction
+      DatabaseCleaner.clean_with(:truncation)
+    end
+
+    config.around(:each) do |example|
+      DatabaseCleaner.cleaning do
+        example.run
+      end
     end
   end
 end
