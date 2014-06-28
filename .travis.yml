@@ -7,8 +7,8 @@ rvm:
   - jruby-19mode
   - jruby-head
 env:
-  -"RAILS_VERSION=4.1.0"
-matric:
+  - "RAILS_VERSION=4.1.0"
+matrix:
   allow_failures:
     - env: "RAILS_VERSION=master"
     - rvm: ruby-head
