@@ -15,9 +15,13 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
+ENV['RAILS_ENV'] = 'test'
+
 rails_version = ENV['RAILS_VERSION'] || '4.1.0'
 
 require File.expand_path("../../spec/dummy/rails-#{rails_version}/config/environment", __FILE__)
+
+require 'rspec/rails'
 
 RSpec.configure do |config|
   # The settings below are suggested to provide a good initial experience
