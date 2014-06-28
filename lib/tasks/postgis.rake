@@ -9,4 +9,4 @@ namespace :postgis do
     ActiveRecord::Base.connection.execute('DROP EXTENSION IF EXISTS postgis')
   end
 end
-Rake::Task['db:schema:load'].ehance(['postgis:enable'])
+Rake::Task['db:schema:load'].enhance(['postgis:enable'])
