@@ -1,25 +1,13 @@
 module ActiveRecord
   module ConnectionAdapters
-    module ColumnMethods
-      def self.included(base)
-        base.class_eval do
-          def simplified_type_with_geometry(field_type)
-            field_type == 'geometry' ? :geometry : simplified_type_without_geometry(field_type)
-          end
+    class PostgreSQLColumn < Column
+      attr_accessor :srid, :spatial_type, :dimension
 
-          alias_method_chain :simplified_type, :geometry
-        end
+      def simplified_type_with_geometry(field_type)
+        field_type == 'geometry' ? :geometry : simplified_type_without_geometry(field_type)
       end
-    end
 
-    if RUBY_PLATFORM != 'java'
-      class PostgreSQLColumn < Column
-        include ActiveRecord::ConnectionAdapters::ColumnMethods
-      end
-    else
-      class PostgreSQLColumn
-        include ActiveRecord::ConnectionsAdapters::ColumnMethods
-      end
+      alias_method_chain :simplified_type, :geometry
     end
   end
 end
