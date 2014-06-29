@@ -14,7 +14,7 @@ module ActiveRecord
     end
 
     class PostgreSQLAdapter::ColumnDefinition < ActiveRecord::ConnectionAdapters::ColumnDefinition
-      attr_accessor :srid, :spatial_type, :dimension
+      attr_accessor :spatial_type, :srid, :dimension
     end
 
     class PostgreSQLAdapter::TableDefinition < ActiveRecord::ConnectionAdapters::TableDefinition
@@ -22,8 +22,8 @@ module ActiveRecord
 
       def column_with_spatial(name, type = nil, options = {})
         column = column_without_spatial(name, type, options)[name]
+        column.spatial_type = options[:spatial_type]
         column.srid = options[:srid]
-        column.spatial_type = options[:type]
         column.dimension = options[:dimension]
         self
       end
