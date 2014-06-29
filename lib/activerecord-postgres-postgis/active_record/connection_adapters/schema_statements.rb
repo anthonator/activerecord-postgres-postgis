@@ -3,8 +3,13 @@ module ActiveRecord
     class PostgreSQLAdapter::SchemaCreation < ActiveRecord::ConnectionAdapters::AbstractAdapter::SchemaCreation
       def add_column_options_with_spatial!(sql, options)
         column = options.fetch(:column) { return super }
-        if column.type == :geometry && column.srid && column.spatial_type
-          sql << "(#{column.spatial_type},#{column.srid})"
+        if column.type == :geometry
+          if column.spatial_type || column.srid
+            sql_params = column.spatial_type
+            sql_params << ',' if sql_params && column.srid
+            sql_params = column.srid.to_s.prepend(sql_params || '') if column.srid
+            sql << "(#{sql_params})" if sql_params
+          end
         else
           add_column_options_without_spatial!(sql, options)
         end
