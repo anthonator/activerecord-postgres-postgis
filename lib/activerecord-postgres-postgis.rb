@@ -1,4 +1,5 @@
 require 'active_support'
+require 'rgeo'
 
 if defined?(Rails)
   require 'activerecord-postgres-postgis/railtie'
