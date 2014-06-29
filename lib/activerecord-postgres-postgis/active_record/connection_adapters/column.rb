@@ -20,11 +20,17 @@ module ActiveRecord
 
       private
       def extract_spatial_type(sql_type)
-        $2.upcase if sql_type =~ /^(geometry)\(([a-z]+)(,\d+)?\)/i
+        if sql_type =~ /^(geometry)\(([a-z]+)(,\d+)?\)/i
+          @limit = nil
+          "'#{$2.upcase}'"
+        end
       end
 
       def extract_srid(sql_type)
-        $4.to_i if sql_type =~ /^(geometry)\(([a-z]+)(,(\d+))\)/i
+        if sql_type =~ /^(geometry)\(([a-z]+)(,(\d+))\)/i
+          @limit = nil
+          $4.to_i
+        end
       end
     end
   end
