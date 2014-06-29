@@ -11,11 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140628210427) do
+ActiveRecord::Schema.define(version: 20140628230435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "foos", force: true do |t|
+    t.geometry "bar"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "spatial_ref_sys", id: false, force: true do |t|
     t.integer "srid",                   null: false
