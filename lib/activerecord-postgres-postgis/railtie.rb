@@ -12,7 +12,7 @@ class Postgis < Rails::Railtie
 
   initializer 'activerecord-postgres-postgis' do
     ActiveSupport.on_load :active_record do
-      # TODO require ActiveRecord support
+      require File.expand_path('../../activerecord-postgres-postgis/active_record', __FILE__)
     end
   end
 end
