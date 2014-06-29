@@ -15,5 +15,7 @@ matrix:
     - env: "RAILS_VERSION=master"
     - rvm: ruby-head
     - rvm: jruby-head
+script:
+  - bundle exec rake db:migrate
 before_script:
   - psql -c 'create database activerecord_postgresql_postgis_test;' -U postgres
