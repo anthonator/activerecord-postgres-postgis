@@ -17,5 +17,6 @@ matrix:
     - rvm: jruby-head
 script:
   - cd spec/dummy/rails-$RAILS_VERSION; bundle exec rake db:migrate
+  - cd ../../../; bundle exec rake spec
 before_script:
   - psql -c 'create database activerecord_postgresql_postgis_test;' -U postgres
