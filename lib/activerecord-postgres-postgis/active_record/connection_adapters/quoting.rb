@@ -1,8 +1,6 @@
 module ActiveRecord
   module ConnectionAdapters
-    extend ActiveRecord::Postgres::Postgis::Utils::Superclasser
-    
-    class PostgreSQLAdapter < adapter_superclass
+    class PostgreSQLAdapter < AbstractAdapter
       module Quoting
         def type_cast_with_spatial(value, column, array_member = false)
           if value.kind_of?(RGeo::Feature::Geometry)

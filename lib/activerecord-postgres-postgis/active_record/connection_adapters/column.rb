@@ -1,8 +1,6 @@
 module ActiveRecord
   module ConnectionAdapters
-    extend ActiveRecord::Postgres::Postgis::Utils::Superclasser
-
-    class PostgreSQLColumn < column_superclass
+    class PostgreSQLColumn < Column
       attr_reader :spatial_type, :srid, :dimension
 
       def initialize_with_spatial(name, default, oid_type, sql_type = nil, null = true)

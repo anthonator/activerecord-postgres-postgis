@@ -1,8 +1,6 @@
 module ActiveRecord
   module ConnectionAdapters
-    extend ActiveRecord::Postgres::Postgis::Utils::Superclasser
-
-    class PostgreSQLAdapter < adapter_superclass
+    class PostgreSQLAdapter < AbstractAdapter
       def prepare_column_options_with_spatial(column, types)
         spec = prepare_column_options_without_spatial(column, types)
         spec[:spatial_type] = column.spatial_type if column.respond_to?(:spatial_type) && column.spatial_type
