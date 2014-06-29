@@ -27,7 +27,7 @@ module ActiveRecord
         alias_method_chain :native_database_types, :spatial
       end
     else
-      class PostgreSQLAdapter
+      class PostgreSQLAdapter < JdbcAdapter
         include PostgreSQLAdapterMethods
 
         alias_method_chain :prepare_column_options, :spatial

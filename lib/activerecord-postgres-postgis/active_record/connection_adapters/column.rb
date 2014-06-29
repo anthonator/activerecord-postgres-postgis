@@ -38,9 +38,9 @@ module ActiveRecord
         alias_method_chain :simplified_type, :spatial
       end
     else
-      class PostgreSQLColumn
+      class PostgreSQLColumn < JdbcColumn
         include PostgreSQLColumnMethods
-        
+
         alias_method_chain :initialize, :spatial
         alias_method_chain :simplified_type, :spatial
       end
