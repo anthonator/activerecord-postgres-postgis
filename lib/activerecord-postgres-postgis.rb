@@ -1,6 +1,8 @@
 require 'active_support'
 require 'rgeo'
 
+require 'activerecord-postgres-postgis/utils/superclasser'
+
 if defined?(Rails)
   require 'activerecord-postgres-postgis/railtie'
 else

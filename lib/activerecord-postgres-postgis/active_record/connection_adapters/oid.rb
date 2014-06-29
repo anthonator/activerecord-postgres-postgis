@@ -1,6 +1,8 @@
 module ActiveRecord
   module ConnectionAdapters
-    class PostgreSQLAdapter < AbstractAdapter
+    extend ActiveRecord::Postgres::Postgis::Utils::Superclasser
+    
+    class PostgreSQLAdapter < adapter_superclass
       module OID
         class Spatial < Type
           def initialize(factory = nil)

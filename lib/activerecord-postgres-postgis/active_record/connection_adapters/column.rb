@@ -1,6 +1,8 @@
 module ActiveRecord
   module ConnectionAdapters
-    module PostgreSQLColumnMethods
+    extend ActiveRecord::Postgres::Postgis::Utils::Superclasser
+
+    class PostgreSQLColumn < column_superclass
       attr_reader :spatial_type, :srid, :dimension
 
       def initialize_with_spatial(name, default, oid_type, sql_type = nil, null = true)
@@ -10,9 +12,13 @@ module ActiveRecord
         @srid = extract_srid(sql_type)
       end
 
+      alias_method_chain :initialize, :spatial
+
       def simplified_type_with_spatial(field_type)
         field_type =~ /^(?:geometry)/ ? :geometry : simplified_type_without_spatial(field_type)
       end
+
+      alias_method_chain :simplified_type, :spatial
 
       private
       def extract_spatial_type(sql_type)
@@ -27,22 +33,6 @@ module ActiveRecord
           @limit = nil
           $4.to_i
         end
-      end
-    end
-
-    if RUBY_PLATFORM != 'java'
-      class PostgreSQLColumn < Column
-        include PostgreSQLColumnMethods
-
-        alias_method_chain :initialize, :spatial
-        alias_method_chain :simplified_type, :spatial
-      end
-    else
-      class PostgreSQLColumn < JdbcColumn
-        include PostgreSQLColumnMethods
-
-        alias_method_chain :initialize, :spatial
-        alias_method_chain :simplified_type, :spatial
       end
     end
   end
