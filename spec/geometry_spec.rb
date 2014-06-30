@@ -27,4 +27,20 @@ RSpec.describe :geometry do
     foo.reload
     expect(foo.geometry_without_options).to be_kind_of(RGeo::Feature::Geometry)
   end
+
+  context :queries do
+    before(:each) do
+      @foo = Foo.new(geometry_without_options: 'LINESTRING(0 0, 1 1)')
+      @foo.save!
+      @foo.reload
+    end
+
+    it 'should work with a find_by! query' do
+      expect(Foo.find_by!(geometry_without_options: @foo.geometry_without_options).geometry_without_options).to eq(@foo.geometry_without_options)
+    end
+
+    it 'should work with a where query' do
+      expect(Foo.where(geometry_without_options: @foo.geometry_without_options)[0].geometry_without_options).to eq(@foo.geometry_without_options)
+    end
+  end
 end
