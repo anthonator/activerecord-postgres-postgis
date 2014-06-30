@@ -18,7 +18,10 @@ module ActiveRecord
       alias_method_chain :migration_keys, :spatial
 
       def native_database_types_with_spatial
-        native_database_types_without_spatial.merge({ geometry: { name: 'geometry' } })
+        native_database_types_without_spatial.merge({
+          geometry: { name: 'geometry' },
+          geography: { name: 'geography' }
+        })
       end
 
       alias_method_chain :native_database_types, :spatial

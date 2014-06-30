@@ -13,21 +13,27 @@ module ActiveRecord
       alias_method_chain :initialize, :spatial
 
       def simplified_type_with_spatial(field_type)
-        field_type =~ /^(?:geometry)/ ? :geometry : simplified_type_without_spatial(field_type)
+        if field_type =~ /^(?:geometry)/
+          :geometry
+        elsif field_type =~ /^(?:geography)/
+          :geography
+        else
+          simplified_type_without_spatial(field_type)
+        end
       end
 
       alias_method_chain :simplified_type, :spatial
 
       private
       def extract_spatial_type(sql_type)
-        if sql_type =~ /^(geometry)\(([a-z]+)(,\d+)?\)/i
+        if sql_type =~ /^(geometry|geography)\(([a-z]+)(,\d+)?\)/i
           @limit = nil
           "'#{$2.upcase}'"
         end
       end
 
       def extract_srid(sql_type)
-        if sql_type =~ /^(geometry)\(([a-z]+)(,(\d+))\)/i
+        if sql_type =~ /^(geometry|geography)\(([a-z]+)(,(\d+))\)/i
           @limit = nil
           $4.to_i
         end

@@ -10,6 +10,13 @@ module ActiveRecord
             sql_params = column.srid.to_s.prepend(sql_params || '') if column.srid
             sql << "(#{sql_params})" if sql_params
           end
+        elsif column.type == :geography
+          if column.spatial_type || column.srid
+            sql_params = column.spatial_type
+            sql_params << ',' if sql_params
+            sql_params = 4326.to_s.prepend(sql_params || '')
+            sql << "(#{sql_params})" if sql_params
+          end
         else
           add_column_options_without_spatial!(sql, options)
         end

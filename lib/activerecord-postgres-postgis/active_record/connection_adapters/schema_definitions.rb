@@ -4,12 +4,24 @@ module ActiveRecord
       # Adds geometry type for migrations. So you can add column to a table like:
       #   create_table :locations do |t|
       #     ...
-      #     t.geometry :geom, srid: 423, type: 'LINESTRING', dimension: 2
+      #     t.geometry :geom, srid: 423, type: 'LINESTRING'
       #     ...
       #   end
       #
       def geometry(name, options = {})
         column(name, :geometry, options)
+      end
+
+      # Adds geography type for migrations. So you can add column to a table
+      # like:
+      #   create_table :locations do |t|
+      #     ...
+      #     t.geography :geog, type: 'LINESTRING'
+      #     ...
+      #   end
+      #
+      def geography(name, options = {})
+        column(name, :geography, options)
       end
     end
 

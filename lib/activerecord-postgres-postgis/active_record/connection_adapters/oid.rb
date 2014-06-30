@@ -24,6 +24,7 @@ module ActiveRecord
         end
 
         register_type('geometry', Spatial.new)
+        register_type('geography', Spatial.new(RGeo::Geographic.method(:spherical_factory)))
       end
     end
   end
