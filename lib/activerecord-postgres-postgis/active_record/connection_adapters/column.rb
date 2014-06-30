@@ -1,7 +1,7 @@
 module ActiveRecord
   module ConnectionAdapters
     class PostgreSQLColumn < Column
-      attr_reader :spatial_type, :srid, :dimension
+      attr_reader :spatial_type, :srid
 
       def initialize_with_spatial(name, default, oid_type, sql_type = nil, null = true)
         initialize_without_spatial(name, default, oid_type, sql_type, null)

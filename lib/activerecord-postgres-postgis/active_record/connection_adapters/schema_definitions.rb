@@ -26,7 +26,7 @@ module ActiveRecord
     end
 
     class PostgreSQLAdapter::ColumnDefinition < ActiveRecord::ConnectionAdapters::ColumnDefinition
-      attr_accessor :spatial_type, :srid, :dimension
+      attr_accessor :spatial_type, :srid
     end
 
     class PostgreSQLAdapter::TableDefinition < ActiveRecord::ConnectionAdapters::TableDefinition
@@ -36,7 +36,6 @@ module ActiveRecord
         column = column_without_spatial(name, type, options)[name]
         column.spatial_type = options[:spatial_type]
         column.srid = options[:srid]
-        column.dimension = options[:dimension]
         self
       end
 
