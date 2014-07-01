@@ -1,7 +1,9 @@
-require 'generator_spec'
+require 'generator_spec/test_case'
 require File.expand_path("../../lib/generators/postgis/setup_generator", __FILE__)
 
-RSpec.describe Postgis::SetupGenerator, type: :generator do
+RSpec.describe Postgis::SetupGenerator do
+  include GeneratorSpec::TestCase
+
   destination File.expand_path('../../tmp', __FILE__)
 
   before(:each) do
