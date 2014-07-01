@@ -28,6 +28,10 @@ require 'rails'
 require 'rspec/rails'
 require 'database_cleaner'
 
+# Require supporting ruby files with custom matchers and macros, etc,
+# in spec/support/ and its subdirectories.
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
+
 RSpec.configure do |config|
   # The settings below are suggested to provide a good initial experience
   # with RSpec, but feel free to customize to your heart's content.
@@ -91,7 +95,7 @@ RSpec.configure do |config|
 
     config.before(:suite) do
       DatabaseCleaner.strategy = :transaction
-      DatabaseCleaner.clean_with(:truncation)
+      DatabaseCleaner.clean_with(:truncation, except: %w(spatial_ref_sys))
     end
 
     config.around(:each) do |example|
