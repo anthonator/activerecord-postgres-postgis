@@ -35,7 +35,7 @@ module ActiveRecord
       #   add_geometry_column :roads, :geom, srid: 423, spatial_type: 'LINESTRING', dimension: 2
       #
       def add_geometry_column(table_name, column_name, options = {})
-        execute "SELECT AddGeometryColumn('#{table_name}', '#{column_name}', '#{options[:srid]}', '#{options[:spatial_type]}', '#{options[:dimension]}')"
+        execute "SELECT AddGeometryColumn('#{table_name}', '#{column_name}', #{options[:srid]}, '#{options[:spatial_type]}', #{options[:dimension]})"
       end
     end
   end
