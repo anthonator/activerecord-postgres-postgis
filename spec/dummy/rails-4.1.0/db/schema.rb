@@ -18,11 +18,8 @@ ActiveRecord::Schema.define(version: 20140628230435) do
   enable_extension "postgis"
 
   create_table "foos", force: true do |t|
-    t.geometry  "geometry_with_spatial_type_and_srid",               spatial_type: 'LINESTRING', srid: 423
-    t.geometry  "geometry_with_spatial_type",                        spatial_type: 'LINESTRING'
-    t.geometry  "geometry_without_options"
-    t.geography "geography_with_spatial_type_and_srid",              spatial_type: 'LINESTRING', srid: 4326
-    t.string    "some_array",                           array: true
+    t.geometry  "bar",        spatial_type: 'LINESTRING', srid: 423
+    t.geography "car",        spatial_type: 'LINESTRING', srid: 4326
     t.datetime  "created_at"
     t.datetime  "updated_at"
   end
