@@ -15,6 +15,9 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
+require 'coveralls'
+Coveralls.wear!
+
 ENV['RAILS_ENV'] = 'test'
 
 rails_version = ENV['RAILS_VERSION'] || '4.1.0'

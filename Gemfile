@@ -16,6 +16,8 @@ end
 
 gem 'rails', rails
 
+gem 'coveralls', require: false
+
 platforms :ruby do
   gem 'pg'
 end
